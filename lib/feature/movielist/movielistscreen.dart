@@ -10,15 +10,16 @@ class MovieListScreen extends StatefulWidget {
 }
 
 class _MovieListScreenState extends State<MovieListScreen> {
-  late List<AllListResponse> items;
+  late AllResponse items;
 
   bool isLoading = false;
 
-   late Future<List<AllListResponse>> futureData;
+  late Future<AllResponse> futureData;
 
-  void loadMovieListFuture() {
-   futureData  =   MovieListViewModel().fetchMovieList();
+  Future<AllResponse> loadMovieListFuture() {
+    futureData = MovieListViewModel().fetchMovieList();
     setState(() {});
+    return futureData;
   }
 
   @override
@@ -66,7 +67,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
                   child: Text(
-                    items[position].results.first.title,
+                    items.results![position].title!,
                     style:
                         TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                   ),
@@ -74,7 +75,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12.0, 6.0, 12.0, 12.0),
                   child: Text(
-                    items[position].results.first.title,
+                    items.results![position].title!,
                     style: TextStyle(fontSize: 18.0),
                   ),
                 ),
@@ -111,16 +112,15 @@ class _MovieListScreenState extends State<MovieListScreen> {
   }
 
   buildDataWidget() {
-
-    FutureBuilder<List<AllListResponse>>(
-        future: futureData,
+    FutureBuilder<AllResponse>(
+        future: loadMovieListFuture(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             items = snapshot.requireData;
             return ListView.builder(
               itemBuilder: (BuildContext context, int position) =>
                   buildBody(context, position),
-              itemCount: items.length,
+              itemCount: items.results!.length,
             );
           } else {
             return Center(

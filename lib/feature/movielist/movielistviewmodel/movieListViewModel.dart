@@ -5,7 +5,7 @@ import 'package:petapp/networking/apiclient.dart';
 class MovieListViewModel extends ChangeNotifier {
   ApiClient _api = ApiClient();
 
-  Future<List<AllListResponse>> fetchMovieList() async {
+  Future<AllResponse> fetchMovieList() async {
     return await _api.getMovieList("/popular");
   }
 }
