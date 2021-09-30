@@ -10,21 +10,21 @@ class MovieListScreen extends StatefulWidget {
 }
 
 class _MovieListScreenState extends State<MovieListScreen> {
+  @override
+  void initState() {
+    loadMovieListFuture();
+    super.initState();
+  }
+
   late AllResponse items;
 
   bool isLoading = false;
 
-  late Future<AllResponse> futureData;
-
   Future<AllResponse> loadMovieListFuture() {
-    futureData = MovieListViewModel().fetchMovieList();
-    setState(() {});
-    return futureData;
-  }
-
-  @override
-  void initState() {
-    loadMovieListFuture();
+    setState(() {
+      print('working');
+    });
+    return MovieListViewModel().fetchMovieList();
   }
 
   @override
@@ -36,7 +36,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
           appBar: AppBar(
             title: Text("Networking Example"),
           ),
-          body: Center(child: buildDataWidget()),
+          body: buildDataWidget(),
           floatingActionButton: FloatingActionButton(
             child: isLoading
                 ? CircularProgressIndicator(
@@ -55,7 +55,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
     });
   }
 
-  Widget buildBody(BuildContext ctxt, int position) {
+  Widget buildBody(BuildContext ctxt, int position, AllResponse data) {
     return Column(
       children: <Widget>[
         Row(
@@ -67,7 +67,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
                   child: Text(
-                    items.results![position].title!,
+                    data.results![position].title!,
                     style:
                         TextStyle(fontSize: 22.0, fontWeight: FontWeight.bold),
                   ),
@@ -75,7 +75,7 @@ class _MovieListScreenState extends State<MovieListScreen> {
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12.0, 6.0, 12.0, 12.0),
                   child: Text(
-                    items.results![position].title!,
+                    data.results![position].title!,
                     style: TextStyle(fontSize: 18.0),
                   ),
                 ),
@@ -111,16 +111,16 @@ class _MovieListScreenState extends State<MovieListScreen> {
     );
   }
 
-  buildDataWidget() {
-    FutureBuilder<AllResponse>(
+  Widget buildDataWidget() {
+    return FutureBuilder<AllResponse>(
         future: loadMovieListFuture(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            items = snapshot.requireData;
+            print('${snapshot.data!.results!.length} this is length');
             return ListView.builder(
               itemBuilder: (BuildContext context, int position) =>
-                  buildBody(context, position),
-              itemCount: items.results!.length,
+                  buildBody(context, position, snapshot.data!),
+              itemCount: snapshot.data!.results!.length,
             );
           } else {
             return Center(
