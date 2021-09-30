@@ -1,7 +1,6 @@
 import "package:flutter/cupertino.dart";
 import 'package:flutter/material.dart';
 import 'package:petapp/feature/movielist/movielistresponse/alllist_response.dart';
-import 'package:petapp/feature/movielist/movielistresponse/baselist_response.dart';
 import 'package:petapp/feature/movielist/movielistviewmodel/movieListViewModel.dart';
 
 class MovieListScreen extends StatefulWidget {
