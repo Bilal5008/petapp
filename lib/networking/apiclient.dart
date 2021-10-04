@@ -15,11 +15,7 @@ class ApiClient {
     };
     String queryString = Uri(queryParameters: queryParams).query;
 
-    var requestUrl = AppConfig.instance.apiBaseUrl +
-        "/movie" +
-        getMovie +
-        '?' +
-        queryString; // result - https://www.myurl.com/api/v1/user?param1=1&param2=2
+    var requestUrl = AppConfig.instance.apiBaseUrl + "/movie" + getMovie + '?' + queryString; // result - https://www.myurl.com/api/v1/user?param1=1&param2=2
     var response = await http.get(Uri.parse(requestUrl));
     print(response.body);
     try {
