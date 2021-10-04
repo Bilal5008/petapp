@@ -33,10 +33,15 @@ dependencies:
   dio: ^4.0.0
   http: ^0.13.3 # Networking
   basic_utils: ^3.6.0
+  analyzer: ^1.7.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
