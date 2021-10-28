@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:petapp/feature/facebookpage.dart';
-import 'package:petapp/feature/moviedetail/moviedetailscreen.dart';
-import 'package:petapp/feature/movielist/movielistresponse/alllist_response.dart';
 import 'package:petapp/networking/app_config.dart';
 import 'package:petapp/networking/environment.dart';
-
+import 'Authentication/DashBoard/addpet.dart';
+import 'Authentication/Login/forgetpassword.dart';
+import 'Authentication/SignUp/signup.dart';
 import 'Common/routes.dart';
-import 'feature/InstagramPage.dart';
-import 'feature/moviedetail/moviedetailscreen2.dart';
-import 'feature/movielist/layoutpractice.dart';
 import 'feature/movielist/movielistscreen.dart';
 
 void main() {
@@ -21,6 +17,11 @@ class MyApp extends StatelessWidget {
     final ThemeData theme = ThemeData();
     AppConfig.instance.setEnvironment(Environment.dev);
     return MaterialApp(
+      routes: {
+        Routes.forgetPasswordRoute: (context) => ForgetPasswordScreen(),
+        Routes.signUpRoute: (context) => SignUpScreen(),
+        Routes.dashboardRoute: (context) => AddPetScreen(),
+      },
       title: 'Splash Screen',
       theme: theme.copyWith(
         colorScheme: theme.colorScheme
