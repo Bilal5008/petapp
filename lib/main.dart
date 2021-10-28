@@ -5,6 +5,12 @@ import 'Authentication/DashBoard/addpet.dart';
 import 'Authentication/Login/forgetpassword.dart';
 import 'Authentication/SignUp/signup.dart';
 import 'Common/routes.dart';
+import 'feature/InstagramPage.dart';
+import 'feature/facebookpage.dart';
+import 'feature/moviedetail/moviedetailscreen.dart';
+import 'feature/moviedetail/moviedetailscreen2.dart';
+import 'feature/movielist/layoutpractice.dart';
+import 'feature/movielist/movielistresponse/alllist_response.dart';
 import 'feature/movielist/movielistscreen.dart';
 
 void main() {
