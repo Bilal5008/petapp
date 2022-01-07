@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       // routes: {
       //   '/details': (context) => MovieDetailScreen(),
       // },
-      initialRoute: '/facebook',
+      initialRoute: '/',
       onGenerateRoute: (settings) {
         // If you push the PassArguments route
         if (settings.name == Routes.routeName) {
